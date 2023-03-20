@@ -1,29 +1,51 @@
-let operator = prompt('What do you want to calculate? (+, -, *, /)');
 
-let num1 = prompt('Enter the first number');
-num1 = Number(num1);
 
-let num2 = prompt('Enter the second number');
-num2 = Number(num2);
+class SuperMath {
 
-let sum = num1 + num2;
-let sub = num1 - num2;
-let mult = num1 * num2;
-let div = num1 / num2;
+    input(obj) {
+        obj.x = +prompt("Введіть X");
+        obj.y = +prompt("Введіть Y");
+        obj.znak = prompt("Введіть оператор (+, -, /, *, %)");
 
-switch (operator) {
-    case "+":
-        alert(`${num1} + ${num2} = ${sum}`);
-        break;
-    case "-":
-        alert(`${num1} - ${num2} = ${sub}`);
-        break;
-    case "*":
-        alert(`${num1} * ${num2} = ${mult}`);
-        break;
-    case "/":
-        alert(`${num1} / ${num2} = ${div}`);
-        break;
-    default:
-        alert("Sorry that you don`t want to calculate");
+        if(obj.znak === "+" || obj.znak === "-" || obj.znak === "/" || obj.znak === "*" || obj.znak === "%") {
+            console.log("Знак вірний");
+        } else {
+            alert("Будь ласка введіть оператор коректно (+, -, /, *, %)");
+            obj.znak = prompt("Введіть оператор (+, -, /, *, %)");
+        }
+    }
+
+    calc(obj) {
+        if(confirm("Ви готові до обчислень?")) {
+            switch(obj.znak){
+                case "+":
+                    alert(`${obj.x} + ${obj.y} = ${obj.x + obj.y}`);
+                    break;
+                case "-":
+                    alert(`${obj.x} - ${obj.y} = ${obj.x - obj.y}`);
+                    break;
+                case "/":
+                    alert(`${obj.x} / ${obj.y} = ${obj.x / obj.y}`);
+                    break;
+                case "*":
+                    alert(`${obj.x} * ${obj.y} = ${obj.x * obj.y}`);
+                    break;
+                case "%":
+                    alert(`${obj.x} % ${obj.y} = ${obj.x % obj.y}`);
+                    break;
+            }
+        } else {
+            this.input(obj);
+            this.calc(obj);
+        }
+    }
 }
+
+let obj = {
+    x : 6,
+    y : 5,
+    znak : "*"
+}
+
+const result = new SuperMath();
+result.calc(obj);
